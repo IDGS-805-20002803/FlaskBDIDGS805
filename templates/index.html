@@ -1,65 +1,68 @@
 {% extends "layout.html" %}
-{% block container %}
 
-<div class="bg-gray-50 min-h-screen py-8">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+{% block container %}
+<div class="p-4 mx-auto max-w-screen-2xl mt-10">
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-200 bg-white">
         
-        <div class="bg-white rounded-t-2xl border-t border-x border-gray-200 p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-                <h2 class="text-2xl font-bold text-gray-900">Listado de Alumnos</h2>
-                <p class="text-sm text-gray-500">Administra los registros actuales del sistema.</p>
-            </div>
-            <a href="{{ url_for('alumnos') }}" class="inline-flex items-center px-4 py-2.5 bg-blue-600 text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-all shadow-sm">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                Nuevo Registro
+        <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between p-5 bg-white">
+            <h2 class="text-xl font-bold text-gray-900">Gestión de Alumnos</h2>
+            
+            <a href="{{ url_for('alumnos') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Añadir Nuevo Alumno
             </a>
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-b-2xl shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead class="bg-gray-50 border-b border-gray-200">
-                        <tr>
-                            <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Matrícula</th>
-                            <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Alumno</th>
-                            <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Email</th>
-                            <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        {% for a in alumnos %}
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="text-xs font-bold bg-gray-100 text-gray-700 px-2.5 py-1 rounded-md">#{{ a.id }}</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="h-9 w-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
-                                        {{ a.nombre[0] }}{{ a.apaterno[0] }}
-                                    </div>
-                                    <div class="ml-3">
-                                        <div class="text-sm font-semibold text-gray-900">{{ a.nombre }} {{ a.apaterno }}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                                {{ a.email }}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
-                                <button class="text-blue-600 hover:text-blue-800 font-medium px-2 py-1 rounded-md hover:bg-blue-50">Editar</button>
-                                <button class="text-red-600 hover:text-red-800 font-medium px-2 py-1 rounded-md hover:bg-red-50 ml-2">Borrar</button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
-                <p class="text-xs text-gray-400 font-medium text-center uppercase tracking-widest">Fin del listado</p>
-            </div>
-        </div>
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
+                <tr>
+                    <th scope="col" class="px-6 py-4">ID</th>
+                    <th scope="col" class="px-6 py-4">Nombre</th>
+                    <th scope="col" class="px-6 py-4">Apellido Paterno</th>
+                    <th scope="col" class="px-6 py-4">Email</th>
+                    <th scope="col" class="px-6 py-4 text-center">Registro</th>
+                    <th scope="col" class="px-6 py-4 text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alum in alumno %}
+                <tr class="bg-white border-b hover:bg-gray-50 transition-colors">
+                    <td class="px-6 py-4 font-bold text-gray-900">
+                        #{{ alum.id }}
+                    </td>
+                    <td class="px-6 py-4 text-gray-900 font-medium">
+                        {{ alum.nombre }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ alum.apaterno }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ alum.email }}
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <span class="text-xs font-medium text-gray-500">
+                            {{ alum.created_date.strftime('%d/%m/%Y') if alum.created_date else 'N/A' }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center justify-center space-x-3">
+                            <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 inline-flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path></svg>
+                                Editar
+                            </a>
+                            <a href="detalles?id={{ alum .id }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 inline-flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path></svg>
+                                Detalles
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
-
 {% endblock %}
