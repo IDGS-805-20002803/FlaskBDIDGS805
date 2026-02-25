@@ -13,25 +13,35 @@
         <form method="POST" class="flex flex-col items-center w-full">
             {{ form.csrf_token }}
             
-            <div class="w-full space-y-5 text-center flex flex-col items-center">
-                <div class="w-full flex flex-col items-center">
+            <div class="w-full space-y-5 flex flex-col items-center">
+                
+                {{ form.id }}
+
+                <div class="w-full">
                     {{ macros.camposNuevos(form.nombre) }}
                 </div>
-                <div class="w-full flex flex-col items-center">
-                    {{ macros.camposNuevos(form.apaterno) }}
+
+                <div class="w-full">
+                    {{ macros.camposNuevos(form.apellidos) }}
                 </div>
-                <div class="w-full flex flex-col items-center">
+
+                <div class="w-full">
                     {{ macros.camposNuevos(form.email) }}
                 </div>
+
+                <div class="w-full">
+                    {{ macros.camposNuevos(form.telefono) }}
+                </div>
+
             </div>
-            <br>
-            <div class="w-full mt-8 flex flex-col items-center gap-y-3">
+
+            <div class="w-full mt-10 flex flex-col items-center gap-y-4">
                 <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-5 rounded-xl text-sm transition-all shadow-md active:scale-[0.98]">
                     Registrar Alumno
                 </button>
-                <br>
-                <a href="index" class="text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
-                    Cancelar
+                
+                <a href="{{ url_for('index') }}" class="text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors">
+                    Cancelar y Volver
                 </a>
             </div>
         </form>

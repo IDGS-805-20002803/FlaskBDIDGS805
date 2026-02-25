@@ -21,8 +21,9 @@
                 <tr>
                     <th scope="col" class="px-6 py-4">ID</th>
                     <th scope="col" class="px-6 py-4">Nombre</th>
-                    <th scope="col" class="px-6 py-4">Apellido Paterno</th>
+                    <th scope="col" class="px-6 py-4">Apellidos</th>
                     <th scope="col" class="px-6 py-4">Email</th>
+                    <th scope="col" class="px-6 py-4">Telefono</th>
                     <th scope="col" class="px-6 py-4 text-center">Registro</th>
                     <th scope="col" class="px-6 py-4 text-center">Acciones</th>
                 </tr>
@@ -37,10 +38,13 @@
                         {{ alum.nombre }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ alum.apaterno }}
+                        {{ alum.apellidos }}
                     </td>
                     <td class="px-6 py-4">
                         {{ alum.email }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ alum.telefono }}
                     </td>
                     <td class="px-6 py-4 text-center">
                         <span class="text-xs font-medium text-gray-500">
@@ -49,13 +53,17 @@
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex items-center justify-center space-x-3">
-                            <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 inline-flex items-center">
+                            <a href="modificar?id={{ alum .id }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 inline-flex items-center">
                                 <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path></svg>
                                 Editar
                             </a>
                             <a href="detalles?id={{ alum .id }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 inline-flex items-center">
                                 <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path></svg>
                                 Detalles
+                            </a>
+                                <a href="eliminar?id={{ alum .id }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 inline-flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path></svg>
+                                eliminar
                             </a>
                         </div>
                     </td>
