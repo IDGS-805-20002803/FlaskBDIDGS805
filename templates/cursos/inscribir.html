@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="flex items-center justify-center w-full min-h-[80vh] py-12">
+
+    <form method="POST" action="{{ url_for('cursos.inscribir') }}" class="w-full max-w-md mx-auto">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
+
+        <h3 class="text-2xl font-semibold text-center mb-6 text-heading">Inscribir Alumno a Curso</h3>
+
+        <div class="relative z-0 w-full mb-8 group">
+            <label for="alumno_id" class="block mb-2 text-sm font-medium text-heading">Selecciona un Alumno</label>
+            <select name="alumno_id" id="alumno_id" required
+                class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer">
+                <option value="" disabled selected>Elige un alumno...</option>
+                {% for alumno in alumnos %}
+                    <option value="{{ alumno.id }}">{{ alumno.nombre }} {{ alumno.apellidos }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="relative z-0 w-full mb-8 group">
+            <label for="curso_id" class="block mb-2 text-sm font-medium text-heading">Selecciona un Curso</label>
+            <select name="curso_id" id="curso_id" required
+                class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer">
+                <option value="" disabled selected>Elige un curso...</option>
+                {% for curso in cursos %}
+                    <option value="{{ curso.id }}">{{ curso.nombre }} (Impartido por: {{ curso.maestro.nombre }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mt-6 flex gap-4">
+            <button type="submit"
+                class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none w-full text-center">
+                Confirmar Inscripción
+            </button>
+            <a href="{{ url_for('cursos.index') }}" 
+            class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            Cancelar
+            </a>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

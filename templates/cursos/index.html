@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="p-4 mx-auto max-w-screen-2xl mt-10">
+
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Gestión de Cursos</h2>
+        <div class="flex gap-4">
+            <a href="{{ url_for('cursos.crear') }}" class="text-white bg-green-500 hover:bg-green-600 font-medium rounded-lg text-sm px-5 py-2.5">
+                Nuevo Curso
+            </a>
+            <a href="{{ url_for('cursos.inscribir') }}" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">
+                Inscribir Alumno
+            </a>
+        </div>
+    </div>
+
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">ID</th>
+                <th scope="col" class="px-6 py-3">Nombre del Curso</th>
+                <th scope="col" class="px-6 py-3">Descripción</th>
+                <th scope="col" class="px-6 py-3">Maestro Asignado</th>
+                <th scope="col" class="px-6 py-3 text-center">Detalles y Alumnos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for curso in cursos %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ curso.id }}
+                </td>
+                <td class="px-6 py-4">{{ curso.nombre }}</td>
+                <td class="px-6 py-4">{{ curso.descripcion }}</td>
+                <td class="px-6 py-4">{{ curso.maestro.nombre }} {{ curso.maestro.apellidos }}</td>
+                <td class="px-6 py-4">
+                    <a href="{{ url_for('cursos.detalles', id=curso.id) }}"
+                        class="flex items-center justify-center gap-2 bg-purple-500 text-white px-3 py-2 rounded hover:bg-purple-600">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8.5 11l3-3-3-3 1-1 4 4-4 4-1-1z" />
+                        </svg>
+                        Ver Detalles
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-200 bg-white p-5">
+        <table class="w-full text-sm text-left text-gray-500">
+            </table>
+    </div>
+</div>
+{% endblock %}

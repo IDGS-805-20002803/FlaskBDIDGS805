@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="flex flex-col items-center justify-center w-full min-h-[70vh] py-10 gap-8">
+
+    <div class="relative bg-neutral-primary-soft max-w-md w-full p-6 border border-default rounded-base shadow-xs">
+        <div class="flex flex-col items-center">
+            <div class="w-20 h-20 mb-6 rounded-full bg-brand flex items-center justify-center text-white">
+                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+            </div>
+            
+            <h5 class="mb-2 text-2xl font-semibold tracking-tight text-heading text-center">
+                {{ curso.nombre }}
+            </h5>
+            <span class="text-md text-body text-center mt-1 font-medium">Maestro: {{ curso.maestro.nombre }} {{ curso.maestro.apellidos }}</span>
+            <span class="text-sm text-body text-center mt-3 bg-neutral-primary-medium p-3 rounded-md w-full">{{ curso.descripcion }}</span>
+            
+            <div class="flex mt-6 gap-4">
+                <a href="{{ url_for('cursos.index') }}"
+                    class="inline-flex items-center text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                    Regresar a Cursos
+                </a>
+            </div>
+        </div>
+    </div>
+
+<div class="w-full max-w-2xl mx-auto mt-8 px-4">
+    <div class="relative overflow-hidden bg-white shadow-lg dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+        
+        <div class="p-5 border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-700 text-center">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white">
+                Alumnos Inscritos
+                <span class="ml-2 px-2.5 py-0.5 text-xs font-medium bg-brand text-white rounded-full">
+                    {{ curso.alumnos|length }}
+                </span>
+            </h3>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-800">
+                    <tr>
+                        <th scope="col" class="px-6 py-4 text-center">ID</th>
+                        <th scope="col" class="px-6 py-4">Nombre Completo</th>
+                        <th scope="col" class="px-6 py-4">Correo</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                    {% for alumno in curso.alumnos %}
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors">
+                        <td class="px-6 py-4 font-bold text-center text-gray-900 dark:text-white">
+                            {{ alumno.id }}
+                        </td>
+                        <td class="px-6 py-4 text-gray-700 dark:text-gray-300">
+                            {{ alumno.nombre }} {{ alumno.apellidos }}
+                        </td>
+                        <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
+                            {{ alumno.email }}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3" class="px-6 py-12 text-center">
+                            <p class="text-gray-400 italic">No hay alumnos inscritos en este curso.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}
